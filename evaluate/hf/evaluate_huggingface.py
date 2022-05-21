@@ -31,12 +31,12 @@ def evaluate_huggingface(m, ds):
     
     print('STARTED EVALUATING ...')
 
-    result = dataset.map(evaluate, batched=True, batch_size=8)
+    result = dataset.map(evaluate, batched=True, batch_size=4)
 
     predictions = [x.upper() for x in result['prediction']]
-    references = [x.upper() for x in result['transcript']]
+    transcripts = [x.upper() for x in result['transcript']]
 
-    m_wer = wer(predictions=predictions, references=references, chunk_size=500) * 100
+    m_wer = wer(predictions=predictions, references=transcripts, chunk_size=500) * 100
 
     del model, processor, device, dataset
 

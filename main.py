@@ -14,6 +14,7 @@ def parse_arguments():
 
     parser.add_argument('-dataset', type=str, help='Dataset to use (path to root folder)')
     parser.add_argument('-model', type=str, help='Model to use (path to model location)')
+    parser.add_argument('-scorer', type=str, help='Scorer to use with model if available', default='-1')
     parser.add_argument('-remove_special_chars', type=bool, default=False)
     parser.add_argument('-n_runs', type=int, default=1)
     return parser.parse_args()
@@ -25,6 +26,7 @@ def main():
     args = parse_arguments()
     dataset = args.dataset
     model_name = args.model
+    scorer_name = args.scorer
     task = args.task
     toolkit = args.toolkit
     remove_special_chars = args.remove_special_chars
@@ -32,11 +34,11 @@ def main():
     wer = 0
 
     for i in range(0, n_runs):
-        ds = import_dataset(dataset, remove_special_chars) #pandas dataset containing columns ['audio', 'transcript']
+        ds = import_dataset(dataset, remove_special_chars, toolkit) #pandas dataset containing columns ['audio', 'transcript']
 
-        if args.task == 'evaluate':
-            wer += evaluate_main(toolkit, ds, model_name)
-        if args.task == 'train':
+        if task == 'evaluate':
+            wer += evaluate_main(toolkit, ds, model_name, scorer_name)
+        if task == 'train':
             train_main(toolkit, ds, model_name)
 
         del ds

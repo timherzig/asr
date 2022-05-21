@@ -14,13 +14,13 @@ def clean_transcript(x):
     x = x.replace('ß', 'ss')
     return x
 
-def import_dataset(path, remove_special_chars):
+def import_dataset(path, remove_special_chars, toolkit):
     print('IMPORTING...')
     
     if ('cv' or 'CV') in path:
-        df = import_commonvoice(path)
+        df = import_commonvoice(path, toolkit)
     if ('mls' or 'MLS') in path:
-        df = import_mls(path)
+        df = import_mls(path, toolkit)
 
     if remove_special_chars:
         print('cleaning dataset')
