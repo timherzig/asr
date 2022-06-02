@@ -10,7 +10,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-task', type=str, help='Task to perform: evaluate, train')
-    parser.add_argument('-toolkit', type=str, help='Toolkit to use: deepspeech, huggingface, fairseq')
+    parser.add_argument('-toolkit', type=str, help='Toolkit to use: deepspeech, huggingface, fairseq, torch')
 
     parser.add_argument('-dataset', type=str, help='Dataset to use (path to root folder)')
     parser.add_argument('-model', type=str, help='Model to use (path to model location)')
