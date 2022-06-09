@@ -1,3 +1,4 @@
+# Main entrypoint to the application
 import sys, gc
 import argparse
 from os import remove
